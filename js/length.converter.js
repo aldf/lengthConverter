@@ -12,7 +12,6 @@ lengthConverter = function (className, groups) {
     format: function (to, value) {
       if (to.type == "feet") {
         var feet = value.toString().split(".");
-        console.log(feet);
         if (feet.length > 1)
           return feet[0] + "' " + Math.round(0.1 * feet[1] * 12) / 100 + '"';
         else return feet[0] + "' " + '0"';
@@ -22,7 +21,7 @@ lengthConverter = function (className, groups) {
         if (inches[0].indexOf('"') == -1) return parseFloat(inches[0]) + '"';
         else return parseFloat(inches[0]);
       }
-      return Math.round(value);
+      return parseFloat(value);
     },
     unFormat: function (t) {
       var from = t.from;
@@ -33,11 +32,8 @@ lengthConverter = function (className, groups) {
         if (feet.length > 1)
           inch = Math.round((parseInt(feet[1].replace('"', "")) * 100) / 1.2);
         else inch = 0;
-        console.log(inch);
         feet = parseInt(feet[0].replace("'", ""));
-        console.log(feet);
         from = feet + "." + inch;
-        console.log(from);
       } else if (t.type == "inches") {
         from = t.from.replace('"', "");
       }
@@ -221,7 +217,7 @@ lengthConverter = function (className, groups) {
 
   lc = document.getElementsByClassName(className);
   var i;
-  var stopLisner = false;
+  var stopListener = false;
   for (i = 0; i < lc.length; i++) {
     addListenerMulti(lc[i], "focus click", function () {
       if (this.value.indexOf('"') != -1) {
@@ -233,8 +229,12 @@ lengthConverter = function (className, groups) {
         else this.setSelectionRange(0, sel);
       }
     });
-    lc[i].addEventListener("input", function () {
-      if (!stopLisner) {
+    lc[i].addEventListener("input", function (e) {
+      var keys = [".", "'", '"',' '];
+      if(keys.indexOf(e.data) > -1 ) {
+        stopListener=true;
+      }
+      if (!stopListener) {
         let form = this.closest("form").id;
         if (form == "" || form == null) {
           form = this.closest("form").id = className + "-form";
@@ -248,17 +248,28 @@ lengthConverter = function (className, groups) {
         x.convert();
         group = document.querySelectorAll(selector);
         var j;
-        stopLisner = true;
+        stopListener = true;
         for (j = 0; j < group.length; j++) {
           group[j].value = x[group[j].getAttribute("data-type")].value;
         }
-        stopLisner = false;
+        stopListener = false;
+      }
+      if(keys.indexOf(e.data) > -1 ) {
+        stopListener=false;
       }
       type = this.getAttribute("data-type");
       if (type == "inches" || type == "feet") {
         if (this.value == '0"') this.select(0, 1);
         else {
-          if (this.selectionEnd <= this.value.indexOf("'") + 1)
+          if (
+            this.selectionEnd > this.value.indexOf("'") &&
+            this.value.indexOf("'") != -1
+          )
+            this.setSelectionRange(
+              this.value.indexOf("'") + 2,
+              this.value.length - 1
+            );
+          else if (this.value.indexOf("'") > 0)
             this.setSelectionRange(
               this.value.indexOf("'"),
               this.value.indexOf("'")
