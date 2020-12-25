@@ -17,8 +17,8 @@ check exapmle.html
   <input type="number" data-type="meters" name="from" class="lengthConverter" />
 </form>
 ```
-Using group of cenverters in same form
-every group should use same name
+Using group of convertors in same form element, 
+every group should use same name.
 ```
 <form id="lengths">
 Group 1 <br>
@@ -43,7 +43,7 @@ used in data-type="?"
 - miles
 
 ### Notes
-. lengthConverter  is the class name of the inputs
-. All inputs should use same name as group
-. In every input should use data-type="?" {inches,meters,feet,cm,yards,kilometers,miles}
-. Inputs should be insdie the a from element
+- lengthConverter  is the class name of the inputs
+- All inputs should use same name as group
+- In every input should use data-type="?" {inches,meters,feet,cm,yards,kilometers,miles}
+- Inputs should be insdie the a from element
