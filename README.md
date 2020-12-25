@@ -61,3 +61,4 @@ also can disable formatter on element level by using data-format="0"
 - All inputs should use same name as group
 - In every input should use data-type="?" {inches,meters,feet,cm,yards,kilometers,miles}
 - Inputs should be inside the a from element
+- when using feet or inches type the inpute type should be text because of the formatter or you can use number type after disabling the formatter gloably or on the the element level.
