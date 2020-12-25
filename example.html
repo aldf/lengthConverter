@@ -3,11 +3,14 @@
    <head>
       <script src="js/length.converter.min.js"></script>
       <script type="text/javascript">
-         new lengthConverter("lengthConverter");
-         // lengthConverter  is the class name of the inputs
+         docReady(function() {
+            new lengthConverter("lengthConverter");
+         });
+         // "lengthConverter" is the class name of the inputs
+         // Use after the document loaded
          // all inputs should use same name as group
          // in every input should use data-type="?" {inches,meters,feet,cm,yards,kilometers,miles}
-         // inputs should be insdie the a from element
+         // inputs should be inside the a from element
       </script>
    </head>
    <body>

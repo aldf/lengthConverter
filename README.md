@@ -6,10 +6,12 @@ JavaScript length Converter
 ### JavaScript
 ```
 // add inputs class name
-new lengthConverter("lengthConverter");
+docReady(function() {
+  new lengthConverter("lengthConverter");
+});
 ```
 ### HTML
-check exapmle.html
+check [example](https://aldf.github.io/lengthConverter/example.html)
 ```
 <form id="lengths">
   <input type="text" data-type="inches" name="from" class="lengthConverter" />
@@ -43,7 +45,7 @@ used in data-type="?"
 - miles
 
 ### Notes
-- lengthConverter  is the class name of the inputs
+- Use after the document loaded
 - All inputs should use same name as group
 - In every input should use data-type="?" {inches,meters,feet,cm,yards,kilometers,miles}
-- Inputs should be insdie the a from element
+- Inputs should be inside the a from element

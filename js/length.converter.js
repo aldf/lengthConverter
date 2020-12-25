@@ -1,5 +1,4 @@
-lengthConverter = function (lengthConverter, groups) {
-  let className = lengthConverter;
+lengthConverter = function (className, groups) {
   x = {
     from: 0.0,
     type: "",
@@ -23,7 +22,7 @@ lengthConverter = function (lengthConverter, groups) {
         if (inches[0].indexOf('"') == -1) return parseFloat(inches[0]) + '"';
         else return parseFloat(inches[0]);
       }
-      return parseFloat(value);
+      return Math.round(value);
     },
     unFormat: function (t) {
       var from = t.from;
@@ -220,11 +219,11 @@ lengthConverter = function (lengthConverter, groups) {
     },
   };
 
-  lengthConverter = document.getElementsByClassName(lengthConverter);
+  lc = document.getElementsByClassName(className);
   var i;
   var stopLisner = false;
-  for (i = 0; i < lengthConverter.length; i++) {
-    addListenerMulti(lengthConverter[i], "focus click", function () {
+  for (i = 0; i < lc.length; i++) {
+    addListenerMulti(lc[i], "focus click", function () {
       if (this.value.indexOf('"') != -1) {
         var sel = this.value.indexOf("'");
         if (sel == -1) sel = this.value.indexOf('"');
@@ -234,7 +233,7 @@ lengthConverter = function (lengthConverter, groups) {
         else this.setSelectionRange(0, sel);
       }
     });
-    lengthConverter[i].addEventListener("input", function () {
+    lc[i].addEventListener("input", function () {
       if (!stopLisner) {
         let form = this.closest("form").id;
         if (form == "" || form == null) {
@@ -259,15 +258,7 @@ lengthConverter = function (lengthConverter, groups) {
       if (type == "inches" || type == "feet") {
         if (this.value == '0"') this.select(0, 1);
         else {
-          if (
-            this.selectionEnd > this.value.indexOf("'") &&
-            this.value.indexOf("'") != -1
-          )
-            this.setSelectionRange(
-              this.value.indexOf("'") + 2,
-              this.value.length - 1
-            );
-          else if (this.value.indexOf("'") > 0)
+          if (this.selectionEnd <= this.value.indexOf("'") + 1)
             this.setSelectionRange(
               this.value.indexOf("'"),
               this.value.indexOf("'")
@@ -284,4 +275,14 @@ lengthConverter = function (lengthConverter, groups) {
 };
 function addListenerMulti(el, s, fn) {
   s.split(" ").forEach((e) => el.addEventListener(e, fn, false));
+}
+function docReady(fn) {
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    setTimeout(fn, 1);
+  } else {
+    document.addEventListener("DOMContentLoaded", fn);
+  }
 }
