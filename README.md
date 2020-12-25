@@ -19,6 +19,8 @@ check [example](https://aldf.github.io/lengthConverter/example.html)
   <input type="number" data-type="meters" name="from" class="lengthConverter" />
 </form>
 ```
+
+### Groups
 Using group of convertors in same form element, 
 every group should use same name.
 ```
@@ -28,7 +30,7 @@ Group 1 <br>
   <input type="text" data-type="feet" name="from" class="lengthConverter" />
   <input type="number" data-type="meters" name="from" class="lengthConverter" />
 Group 2 <br>
-  <input type="text" data-type="inches" name="to" class="lengthConverter" />
+  <input type="text" data-type="inches" data-format="0" name="to" class="lengthConverter" />
   <input type="text" data-type="feet" name="to" class="lengthConverter" />
   <input type="number" data-type="meters" name="to" class="lengthConverter" />
 </form>
@@ -43,6 +45,16 @@ used in data-type="?"
 - yards 
 - kilometers
 - miles
+
+### Formatter
+formatter is auto enabled on global level, you can disable it by passing false
+```
+new lengthConverter("lengthConverter", false);
+```
+also can disable formatter on element level by using data-format="0"
+```
+<input type="text" data-type="inches" data-format="0" name="to" class="lengthConverter" />
+```
 
 ### Notes
 - Use after the document loaded

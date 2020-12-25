@@ -6,11 +6,15 @@
          docReady(function() {
             new lengthConverter("lengthConverter");
          });
+         // lengthConverter(className, formatter = true)
          // "lengthConverter" is the class name of the inputs
-         // Use after the document loaded
-         // all inputs should use same name as group
-         // in every input should use data-type="?" {inches,meters,feet,cm,yards,kilometers,miles}
-         // inputs should be inside the a from element
+         // formatter auto enabled on global level, you can disable it by passing false
+         // ex: new lengthConverter("lengthConverter", false);
+         // disable formatter on element level by using data-format="0"
+         // - Use after the document loaded
+         // - all inputs should use same name as group
+         // - in every input should use data-type="?" {inches,meters,feet,cm,yards,kilometers,miles}
+         // - inputs should be inside the a from element
       </script>
    </head>
    <body>
@@ -29,7 +33,7 @@
             To
          </h3>
          <label for="inch">Inch</label>
-         <input type="text" data-type="inches" name="to" class="lengthConverter" />
+         <input type="text" data-type="inches" data-format="0" name="to" class="lengthConverter" />
          <label for="feet">Feet</label>
          <input type="text" data-type="feet" name="to" class="lengthConverter" />
          <label for="meter">Meter</label>
