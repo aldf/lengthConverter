@@ -1,7 +1,8 @@
 # lengthConverter
 JavaScript length Converter
-![](example.gif)
+
 ## Using
+![](example.gif)
 
 ### JavaScript
 ```
