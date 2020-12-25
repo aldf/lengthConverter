@@ -6,8 +6,8 @@ JavaScript length Converter
 
 ### JavaScript
 ```
-// add inputs class name
 docReady(function() {
+// lengthConverter(className, formatter = true)
   new lengthConverter("lengthConverter");
 });
 ```
